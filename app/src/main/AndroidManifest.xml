@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.myproject.qtnapp" >
+    package="com.myproject.qtnapp">
 
     <application
+        android:name=".App"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -12,11 +13,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Qtnapp"
-        tools:targetApi="31" >
+        tools:targetApi="31">
         <activity
-            android:name=".ui.login.LoginActivity2"
-            android:exported="false"
-            android:label="@string/title_activity_login2" />
+            android:name=".ui.meal.MealActivity"
+            android:exported="false" />
         <activity
             android:name=".ui.navi.NavigationActivity"
             android:exported="false" />
@@ -28,7 +28,7 @@
             android:exported="false" />
         <activity
             android:name=".ui.splash.SplashScreen"
-            android:exported="true" >
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

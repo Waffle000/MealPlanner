@@ -8,4 +8,110 @@
     android:weightSum="5"
     tools:context=".ui.login.LoginActivity">
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:text="Hello Welcome"
+        android:layout_weight="2"
+        android:gravity="bottom|center"
+        android:textColor="@color/colorPrimary"
+        android:textSize="20sp"
+        android:textStyle="bold"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="3"
+        android:padding="32dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Email"
+            android:textSize="16sp"
+            android:textColor="@color/colorPrimary"
+            android:layout_marginBottom="8dp"
+            android:textStyle="bold"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textEmailAddress"
+            android:hint="example@gmail.com"
+            android:layout_marginBottom="20dp"
+            style="@style/EditTextPrimary"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Password"
+            android:textSize="16sp"
+            android:textColor="@color/colorPrimary"
+            android:layout_marginBottom="8dp"
+            android:textStyle="bold"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword"
+            android:hint="password"
+            style="@style/EditTextPrimary" />
+
+        <TextView
+            android:id="@+id/btn_forgot_pw"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/Red"
+            android:text="Lupa Password?"
+            android:textSize="12sp"
+            android:layout_gravity="right"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="7dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Login"
+            style="@style/ButtonPrimary"
+            android:layout_marginTop="40dp"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:weightSum="7">
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_weight="3"
+                android:background="@color/black"
+                android:layout_gravity="center"/>
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:text="or"
+                android:gravity="center"
+                android:layout_weight="1"
+                android:textSize="12sp" />
+            <View
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_weight="3"
+                android:background="@color/black"
+                android:layout_gravity="center" />
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Sign Up"
+            style="@style/ButtonSecondary"
+            android:layout_marginTop="20dp"/>
+
+    </LinearLayout>
 </LinearLayout>
