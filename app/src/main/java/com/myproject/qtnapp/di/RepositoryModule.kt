@@ -7,6 +7,14 @@ import org.koin.dsl.module
 
 val repositoryModule = module {
     single {
-        AppRepository(LocalRepository(get()), RemoteRepository(get()))
+        AppRepository(get(), get())
+    }
+
+    single {
+        RemoteRepository(get())
+    }
+
+    single {
+        LocalRepository(get())
     }
 }
