@@ -44,6 +44,9 @@
         <item name="windowNoTitle">true</item>
     </style>
 
+    <style name="DialogTheme" parent="Theme.AppCompat.Light.Dialog">
+        <item name="colorAccent">@color/colorPrimary</item>
+    </style>
 
     <style name="Theme.Qtnapp.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 

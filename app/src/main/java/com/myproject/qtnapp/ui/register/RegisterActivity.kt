@@ -1,16 +1,29 @@
 package com.myproject.qtnapp.ui.register
 
+import android.app.DatePickerDialog
+import android.app.TimePickerDialog
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import com.myproject.qtnapp.R
+import com.myproject.qtnapp.data.local.entity.UserEntity
 import com.myproject.qtnapp.databinding.ActivityRegisterBinding
+import org.koin.android.ext.android.inject
+import org.koin.core.parameter.parametersOf
+import java.text.SimpleDateFormat
+import java.util.*
 import java.util.regex.Pattern
 
-class RegisterActivity : AppCompatActivity() {
+class RegisterActivity : AppCompatActivity(), RegisterView {
 
     private lateinit var binding: ActivityRegisterBinding
+
+    private var format: String? = null
+
+    private val presenter : RegisterPresenter by inject {
+        parametersOf(this)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -21,16 +34,24 @@ class RegisterActivity : AppCompatActivity() {
 
     private fun init() {
         binding.btnRegister.setOnClickListener {
-            testing()
+            Log.e("TAG", "${binding.etPasswordRegister.text} && ${binding.etConfirmPasswordRegister.text}")
+            validation()
         }
-    }
 
-    private fun testing() {
-        Log.e("TAG", "${binding.etConfirmPasswordRegister.text} DAN ${binding.etPasswordRegister.text}")
-        if(!binding.etConfirmPasswordRegister.text.toString().equals(binding.etPasswordRegister.text.toString())) {
-            binding.etConfirmPasswordRegister.error = "Password tidak sama"
-        } else {
-            Toast.makeText(this, "SUCCESS", Toast.LENGTH_SHORT).show()
+        binding.tvBirtdateRegister.setOnClickListener {
+            val currentDate = Calendar.getInstance()
+            val dateTime = Calendar.getInstance()
+            DatePickerDialog(
+                this, R.style.DialogTheme, DatePickerDialog.OnDateSetListener()
+                { view, year, month, dayOfMonth ->
+                    dateTime.set(year, month, dayOfMonth)
+                    format = SimpleDateFormat("dd/MM/yyyy").format(dateTime.time)
+                    binding.tvBirtdateRegister.text = format
+                },
+                currentDate[Calendar.YEAR],
+                currentDate[Calendar.MONTH],
+                currentDate[Calendar.DATE]
+            ).show()
         }
     }
     private fun validation() {
@@ -48,9 +69,24 @@ class RegisterActivity : AppCompatActivity() {
                 "Password harus menggunakan uppercase, lowercase, angka, dan symbol",
                 Toast.LENGTH_SHORT
             ).show()
-           !binding.etConfirmPasswordRegister.text.equals(binding.etPasswordRegister.text) -> binding.etConfirmPasswordRegister.error = "Password tidak sama"
-            else -> Toast.makeText(this, "SUCCESS", Toast.LENGTH_SHORT).show()
+           binding.etConfirmPasswordRegister.text.toString() != binding.etPasswordRegister.text.toString() -> binding.etConfirmPasswordRegister.error = "Password tidak sama"
+            format.isNullOrBlank() -> binding.tvBirtdateRegister.error = "Tanggal Lahir Masih Kosong"
+            else -> sendDataToDatabase()
         }
+    }
+
+    private fun sendDataToDatabase() {
+        val user = UserEntity(
+            id = 0,
+            fullName = binding.etFullnameRegister.text.toString(),
+            email = binding.etEmailRegister.text.toString(),
+            phoneNumber = binding.etPhoneRegister.text.toString().toInt(),
+            password = binding.etPasswordRegister.text.toString(),
+            birthdate = format,
+            newUser = false
+        )
+
+        presenter.insertUser(user)
     }
 
     private fun validationPassword(password: String): Boolean {
@@ -66,5 +102,9 @@ class RegisterActivity : AppCompatActivity() {
             "$");
         val match = passwordPattern.matcher(password)
         return match.matches()
+    }
+
+    override fun successInsert(success: Boolean) {
+
     }
 }
