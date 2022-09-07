@@ -35,6 +35,7 @@
             android:textStyle="bold"/>
 
         <EditText
+            android:id="@+id/et_email_login"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textEmailAddress"
@@ -52,6 +53,7 @@
             android:textStyle="bold"/>
 
         <EditText
+            android:id="@+id/et_pass_login"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textPassword"
@@ -70,6 +72,7 @@
             android:layout_marginBottom="7dp"/>
 
         <TextView
+            android:id="@+id/btn_login"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Login"
@@ -107,6 +110,7 @@
         </LinearLayout>
 
         <TextView
+            android:id="@+id/btn_login_to_register"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Sign Up"

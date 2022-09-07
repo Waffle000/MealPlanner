@@ -55,6 +55,11 @@ class RegisterActivity : AppCompatActivity(), RegisterView {
         }
     }
     private fun validation() {
+        if(binding.etEmailRegister.text.isNullOrBlank()) {
+            binding.etEmailRegister.error = "Email Masih Kosong"
+        }
+
+
         when {
             binding.etEmailRegister.text.isNullOrBlank() -> binding.etEmailRegister.error =
                 "Email Masih Kosong"

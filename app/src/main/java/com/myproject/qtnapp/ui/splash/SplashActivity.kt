@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import com.myproject.qtnapp.R
+import com.myproject.qtnapp.ui.login.LoginActivity
 import com.myproject.qtnapp.ui.register.RegisterActivity
 
 class SplashActivity : AppCompatActivity() {
@@ -16,7 +17,7 @@ class SplashActivity : AppCompatActivity() {
 
     private fun delaySplash() {
         Handler().postDelayed({
-            startActivity(Intent(this, RegisterActivity::class.java))
+            startActivity(Intent(this, LoginActivity::class.java))
             finish()
         }, 2000)
 
