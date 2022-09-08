@@ -18,7 +18,7 @@ class UserEntity(
     @ColumnInfo(name = "email")
     val email: String?,
     @ColumnInfo(name = "phone_number")
-    val phoneNumber: Int?,
+    val phoneNumber: String?,
     @ColumnInfo(name = "password")
     val password: String,
     @ColumnInfo(name = "birthdate")

@@ -58,7 +58,7 @@
         android:id="@+id/et_phone_register"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="textEmailAddress"
+        android:inputType="number"
         android:hint="08xxxxxxxxxx"
         android:layout_marginBottom="20dp"
         style="@style/EditTextPrimary"/>

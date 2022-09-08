@@ -2,6 +2,7 @@ package com.myproject.qtnapp.ui.login
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Toast
 import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
@@ -53,7 +54,12 @@ class LoginActivity : AppCompatActivity(), LoginView {
         }
     }
 
+    override fun onError(t: Throwable) {
+        Toast.makeText(this, "Error: $t", Toast.LENGTH_SHORT).show()
+    }
+
     override fun successLogin(data: UserEntity) {
         startActivity(Intent(this, NavigationActivity::class.java))
+        finish()
     }
 }

@@ -21,10 +21,11 @@ class RegisterPresenter(private val repository: AppRepository, private val view:
     }
 
     private fun onError(t:Throwable){
-        Log.e("ERROR", "ERROR RESPONSE $t")
+        view.onError(t)
     }
 }
 
 interface RegisterView {
+    fun onError(t: Throwable)
     fun successInsert(success : Boolean)
 }

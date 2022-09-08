@@ -2,6 +2,7 @@ package com.myproject.qtnapp.ui.register
 
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -9,6 +10,7 @@ import android.widget.Toast
 import com.myproject.qtnapp.R
 import com.myproject.qtnapp.data.local.entity.UserEntity
 import com.myproject.qtnapp.databinding.ActivityRegisterBinding
+import com.myproject.qtnapp.ui.login.LoginActivity
 import org.koin.android.ext.android.inject
 import org.koin.core.parameter.parametersOf
 import java.text.SimpleDateFormat
@@ -21,7 +23,7 @@ class RegisterActivity : AppCompatActivity(), RegisterView {
 
     private var format: String? = null
 
-    private val presenter : RegisterPresenter by inject {
+    private val presenter: RegisterPresenter by inject {
         parametersOf(this)
     }
 
@@ -34,7 +36,6 @@ class RegisterActivity : AppCompatActivity(), RegisterView {
 
     private fun init() {
         binding.btnRegister.setOnClickListener {
-            Log.e("TAG", "${binding.etPasswordRegister.text} && ${binding.etConfirmPasswordRegister.text}")
             validation()
         }
 
@@ -54,29 +55,44 @@ class RegisterActivity : AppCompatActivity(), RegisterView {
             ).show()
         }
     }
+
     private fun validation() {
-        if(binding.etEmailRegister.text.isNullOrBlank()) {
+        if (binding.etEmailRegister.text.isNullOrBlank()) {
             binding.etEmailRegister.error = "Email Masih Kosong"
         }
 
+        if(binding.etFullnameRegister.text.isNullOrBlank()) {
+            binding.etFullnameRegister.error = "Nama Masih Kosong"
+        }
 
-        when {
-            binding.etEmailRegister.text.isNullOrBlank() -> binding.etEmailRegister.error =
-                "Email Masih Kosong"
-            binding.etPhoneRegister.text.isNullOrBlank() -> binding.etPhoneRegister.error =
-                "Nomor Telepon Masih Kosong"
-            binding.etPasswordRegister.text.isNullOrBlank() -> binding.etPasswordRegister.error =
-                "Password Masih Kosong"
-            !validationPassword(
-                binding.etPasswordRegister.text.toString().trim()
-            ) -> Toast.makeText(
+        if (binding.etPhoneRegister.text.isNullOrBlank()) {
+            binding.etPhoneRegister.error = "Nomor Telepon Masih Kosong"
+        }
+
+        if (binding.etPasswordRegister.text.isNullOrBlank()) {
+            binding.etPasswordRegister.error = "Password Masih Kosong"
+        } else if (!validationPassword(binding.etPasswordRegister.text.toString().trim())) {
+            Toast.makeText(
                 this,
-                "Password harus menggunakan uppercase, lowercase, angka, dan symbol",
+                "Password harus menggunakan minimal 8 karakter, uppercase, lowercase, angka, dan symbol",
                 Toast.LENGTH_SHORT
             ).show()
-           binding.etConfirmPasswordRegister.text.toString() != binding.etPasswordRegister.text.toString() -> binding.etConfirmPasswordRegister.error = "Password tidak sama"
-            format.isNullOrBlank() -> binding.tvBirtdateRegister.error = "Tanggal Lahir Masih Kosong"
-            else -> sendDataToDatabase()
+        }
+
+
+        if (!binding.etConfirmPasswordRegister.text.toString().equals(binding.etPasswordRegister.text.toString())) {
+            binding.etConfirmPasswordRegister.error = "Password Tidak Sama"
+        }
+
+        if (format.isNullOrBlank()) {
+            "Tanggal Lahir Masih Kosong"
+        }
+
+        if (!binding.etEmailRegister.text.isNullOrBlank() && !binding.etPhoneRegister.text.isNullOrBlank() && !binding.etPasswordRegister.text.isNullOrBlank() && validationPassword(
+                binding.etPasswordRegister.text.toString().trim()
+            ) && (binding.etConfirmPasswordRegister.text.toString() == binding.etPasswordRegister.text.toString() && !format.isNullOrBlank())
+        ) {
+            sendDataToDatabase()
         }
     }
 
@@ -85,7 +101,7 @@ class RegisterActivity : AppCompatActivity(), RegisterView {
             id = 0,
             fullName = binding.etFullnameRegister.text.toString(),
             email = binding.etEmailRegister.text.toString(),
-            phoneNumber = binding.etPhoneRegister.text.toString().toInt(),
+            phoneNumber = binding.etPhoneRegister.text.toString(),
             password = binding.etPasswordRegister.text.toString(),
             birthdate = format,
             newUser = false
@@ -96,20 +112,28 @@ class RegisterActivity : AppCompatActivity(), RegisterView {
 
     private fun validationPassword(password: String): Boolean {
         Log.e("TAG", "$password")
-        val passwordPattern = Pattern.compile("^" +
-            "(?=.*[0-9])" +         //at least 1 digit
-            "(?=.*[a-z])" +         //at least 1 lower case letter
-            "(?=.*[A-Z])" +         //at least 1 upper case letter
-            "(?=.*[a-zA-Z])" +      //any letter
-            "(?=.*[@#$%^&+=])" +    //at least 1 special character
-            "(?=\\S+$)" +           //no white spaces
-            ".{8,}" +               //at least 8 characters
-            "$");
+        val passwordPattern = Pattern.compile(
+            "^" +
+                "(?=.*[0-9])" +         //at least 1 digit
+                "(?=.*[a-z])" +         //at least 1 lower case letter
+                "(?=.*[A-Z])" +         //at least 1 upper case letter
+                "(?=.*[a-zA-Z])" +      //any letter
+                "(?=.*[@#$%^&+=])" +    //at least 1 special character
+                "(?=\\S+$)" +           //no white spaces
+                ".{8,}" +               //at least 8 characters
+                "$"
+        );
         val match = passwordPattern.matcher(password)
         return match.matches()
     }
 
-    override fun successInsert(success: Boolean) {
+    override fun onError(t: Throwable) {
+        Toast.makeText(this, "Error $t", Toast.LENGTH_SHORT).show()
+    }
 
+    override fun successInsert(success: Boolean) {
+        if(success) {
+            finish()
+        }
     }
 }

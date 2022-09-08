@@ -24,10 +24,11 @@ class LoginPresenter(private val repository: AppRepository, private val view: Lo
     }
 
     private fun onError(t:Throwable){
-        Log.e("ERROR", "ERROR RESPONSE $t")
+        view.onError(t)
     }
 }
 
 interface LoginView {
+    fun onError(t: Throwable)
     fun successLogin(data: UserEntity)
 }
