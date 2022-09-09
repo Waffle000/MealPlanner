@@ -16,4 +16,8 @@ class LocalRepository(private val appDataBase: AppDataBase) {
     fun getLogin(email: String, password: String) = getResult {
         appDataBase.userDao().getDataLogin(email, password)
     }
+
+    fun updateUser(user: UserEntity) = getResult {
+        appDataBase.userDao().updateUser(user)
+    }
 }

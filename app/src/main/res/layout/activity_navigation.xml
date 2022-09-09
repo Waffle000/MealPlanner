@@ -6,16 +6,20 @@
     android:layout_height="match_parent"
     tools:context=".ui.navi.NavigationActivity">
 
-    <FrameLayout
-        android:id="@+id/fl_navi"
+    <fragment
+        android:id="@+id/fg_navi"
+        android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@id/bnv_navi"/>
+        android:layout_above="@id/bnv_navi"
+        app:navGraph="@navigation/nav_graph"
+        app:defaultNavHost="true"/>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bnv_navi"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"/>
+        android:layout_alignParentBottom="true"
+        app:menu="@menu/nav_menu" />
 
 </RelativeLayout>

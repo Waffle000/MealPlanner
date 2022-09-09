@@ -15,4 +15,6 @@ class AppRepository(private val local: LocalRepository, private val remote: Remo
     fun getDataLogin(email: String, password: String) : Flowable<UserEntity?> {
         return local.getLogin(email, password)
     }
+
+    fun updateUser(user: UserEntity) = local.updateUser(user)
 }

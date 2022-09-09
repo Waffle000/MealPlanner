@@ -3,6 +3,19 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Enrico Maricar/AndroidStudioProjects/qtnapp/app/src/main/res/drawable/bg_rounded_white_stroke_black.xml" value="0.2565" />
+        <entry key="..\:/Users/Enrico Maricar/AndroidStudioProjects/qtnapp/app/src/main/res/drawable/circular_progressbar.xml" value="0.3425" />
+        <entry key="..\:/Users/Enrico Maricar/AndroidStudioProjects/qtnapp/app/src/main/res/drawable/custom_progressbar.xml" value="0.3425" />
+        <entry key="..\:/Users/Enrico Maricar/AndroidStudioProjects/qtnapp/app/src/main/res/drawable/ic_chat.xml" value="0.353" />
+        <entry key="..\:/Users/Enrico Maricar/AndroidStudioProjects/qtnapp/app/src/main/res/drawable/ic_profile.xml" value="0.353" />
+        <entry key="..\:/Users/Enrico Maricar/AndroidStudioProjects/qtnapp/app/src/main/res/layout/activity_category.xml" value="0.290625" />
+        <entry key="..\:/Users/Enrico Maricar/AndroidStudioProjects/qtnapp/app/src/main/res/layout/activity_login.xml" value="0.5" />
+        <entry key="..\:/Users/Enrico Maricar/AndroidStudioProjects/qtnapp/app/src/main/res/layout/activity_navigation.xml" value="0.2170940170940171" />
+        <entry key="..\:/Users/Enrico Maricar/AndroidStudioProjects/qtnapp/app/src/main/res/layout/fragment_home.xml" value="0.5" />
+        <entry key="..\:/Users/Enrico Maricar/AndroidStudioProjects/qtnapp/app/src/main/res/layout/item_category.xml" value="0.5" />
+        <entry key="..\:/Users/Enrico Maricar/AndroidStudioProjects/qtnapp/app/src/main/res/layout/item_home.xml" value="0.371875" />
+        <entry key="..\:/Users/Enrico Maricar/AndroidStudioProjects/qtnapp/app/src/main/res/layout/item_home_horizontal.xml" value="0.5" />
+        <entry key="..\:/Users/Enrico Maricar/AndroidStudioProjects/qtnapp/app/src/main/res/menu/nav_menu.xml" value="0.37083333333333335" />
         <entry key="..\:/Users/enric/AndroidStudioProjects/qtn-km-enricoolivianmaricar/app/src/main/res/drawable/bg_rounded_white.xml" value="0.2615" />
         <entry key="..\:/Users/enric/AndroidStudioProjects/qtn-km-enricoolivianmaricar/app/src/main/res/drawable/bg_rounded_white_stroke_black.xml" value="0.2615" />
         <entry key="..\:/Users/enric/AndroidStudioProjects/qtn-km-enricoolivianmaricar/app/src/main/res/layout/activity_category.xml" value="0.33" />

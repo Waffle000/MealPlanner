@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
@@ -14,12 +15,23 @@
 
     <TextView
         android:id="@+id/tv_item_category"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Beef"
         android:textAlignment="center"
         android:textColor="@color/black"
+        android:layout_below="@id/iv_item_category"
+        android:layout_centerHorizontal="true"
         android:textStyle="bold"
         android:textSize="16sp"/>
 
-</LinearLayout>
+    <ImageView
+        android:id="@+id/iv_check_category"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_check"
+        android:layout_alignStart="@id/iv_item_category"
+        android:visibility="gone"
+        app:tint="@color/green" />
+
+</RelativeLayout>

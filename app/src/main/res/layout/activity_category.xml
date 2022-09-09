@@ -37,9 +37,9 @@
 
     <TextView
         android:id="@+id/btn_submit_category"
+        style="@style/ButtonPrimary"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Submit Favorite Category"
-        style="@style/ButtonPrimary"
-        android:layout_alignParentBottom="true"/>
+        android:layout_alignParentBottom="true"
+        android:text="Submit Favorite Category" />
 </RelativeLayout>
