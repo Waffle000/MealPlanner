@@ -20,6 +20,21 @@ class RegisterPresenter(private val repository: AppRepository, private val view:
         )
     }
 
+    fun checkEmail(user:UserEntity) {
+        CompositeDisposable().add(
+            repository.checkEmail(user.email ?: "")
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({
+                   if (it == null) {
+                       Log.e("TAG","SUCCESS")
+                   } else {
+                       Log.e("TAG", "ERROR")
+                   }
+                },this::onError)
+        )
+    }
+
     private fun onError(t:Throwable){
         view.onError(t)
     }

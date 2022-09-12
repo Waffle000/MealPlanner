@@ -4,6 +4,7 @@ import androidx.room.*
 import com.myproject.qtnapp.data.local.entity.UserEntity
 import io.reactivex.Completable
 import io.reactivex.Flowable
+import java.util.concurrent.Flow
 
 @Dao
 interface UserDao {
@@ -12,6 +13,12 @@ interface UserDao {
 
     @Query("SELECT * FROM user_db WHERE email= :email AND password= :password")
     fun getDataLogin(email: String, password: String) : Flowable<UserEntity?>
+
+    @Query("SELECT * FROM user_db WHERE email= :email AND password= :password")
+    suspend fun getDataLoginSus(email: String, password: String) : UserEntity?
+
+    @Query("SELECT * FROM user_db WHERE email= :email")
+    fun checkEmail(email: String) : Flowable<UserEntity>
 
     @Update
     fun updateUser(user: UserEntity) : Completable

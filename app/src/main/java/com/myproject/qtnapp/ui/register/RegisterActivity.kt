@@ -2,6 +2,7 @@ package com.myproject.qtnapp.ui.register
 
 import android.app.DatePickerDialog
 import android.os.Bundle
+import android.util.Patterns
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.myproject.qtnapp.R
@@ -30,6 +31,7 @@ class RegisterActivity : AppCompatActivity(), RegisterView {
         binding = ActivityRegisterBinding.inflate(layoutInflater)
         setContentView(binding.root)
         init()
+        format = SimpleDateFormat("dd/MM/yyyy").format(Calendar.getInstance().time)
     }
 
     private fun init() {
@@ -41,7 +43,7 @@ class RegisterActivity : AppCompatActivity(), RegisterView {
             val currentDate = Calendar.getInstance()
             val dateTime = Calendar.getInstance()
             DatePickerDialog(
-                this, R.style.DialogTheme, DatePickerDialog.OnDateSetListener()
+                this, DatePickerDialog.OnDateSetListener()
                 { view, year, month, dayOfMonth ->
                     dateTime.set(year, month, dayOfMonth)
                     format = SimpleDateFormat("dd/MM/yyyy").format(dateTime.time)
@@ -57,6 +59,12 @@ class RegisterActivity : AppCompatActivity(), RegisterView {
     private fun validation() {
         if (binding.etEmailRegister.text.isNullOrBlank()) {
             binding.etEmailRegister.error = "Email Masih Kosong"
+        } else if (!binding.etEmailRegister.text.toString().isValidEmail()) {
+            Toast.makeText(
+                this,
+                "Format email tidak sesuai",
+                Toast.LENGTH_SHORT
+            ).show()
         }
 
         if(binding.etFullnameRegister.text.isNullOrBlank()) {
@@ -125,17 +133,19 @@ class RegisterActivity : AppCompatActivity(), RegisterView {
     private fun validationPassword(password: String): Boolean {
         val passwordPattern = Pattern.compile(
             "^" +
-                "(?=.*[0-9])" +         //at least 1 digit
-                "(?=.*[a-z])" +         //at least 1 lower case letter
-                "(?=.*[A-Z])" +         //at least 1 upper case letter
-                "(?=.*[@#$%^&+=])" +    //at least 1 special character
-                "(?=\\S+$)" +           //no white spaces
+                "(?=.*[0-9])" +
+                "(?=.*[a-z])" +
+                "(?=.*[A-Z])" +
+                "(?=.*[@#$%^&+=])" +
+                "(?=\\S+$)" +
                 ".{8,}" +
                 "$"
         );
         val match = passwordPattern.matcher(password)
         return match.matches()
     }
+
+    private fun CharSequence?.isValidEmail() = !isNullOrEmpty() && Patterns.EMAIL_ADDRESS.matcher(this).matches()
 
     override fun onError(t: Throwable) {
         Toast.makeText(this, "Error $t", Toast.LENGTH_SHORT).show()
