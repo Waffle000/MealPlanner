@@ -1,19 +1,17 @@
 package com.myproject.qtnapp.ui.register
 
 import android.app.DatePickerDialog
-import android.app.TimePickerDialog
-import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.myproject.qtnapp.R
 import com.myproject.qtnapp.data.local.entity.UserEntity
 import com.myproject.qtnapp.databinding.ActivityRegisterBinding
-import com.myproject.qtnapp.ui.login.LoginActivity
 import org.koin.android.ext.android.inject
 import org.koin.core.parameter.parametersOf
 import java.text.SimpleDateFormat
+import java.time.LocalDate
+import java.time.Period
 import java.util.*
 import java.util.regex.Pattern
 
@@ -84,13 +82,20 @@ class RegisterActivity : AppCompatActivity(), RegisterView {
             binding.etConfirmPasswordRegister.error = "Password Tidak Sama"
         }
 
+        val parser = SimpleDateFormat("dd/MM/yyyy")
+        val day = SimpleDateFormat("dd").format(parser.parse(format))
+        val month = SimpleDateFormat("MM").format(parser.parse(format))
+        val year = SimpleDateFormat("yyyy").format(parser.parse(format))
+
         if (format.isNullOrBlank()) {
             "Tanggal Lahir Masih Kosong"
+        } else if (getAge(year.toInt(), month.toInt(), day.toInt()) < 18) {
+            Toast.makeText(this, "Usia belum mencukupi", Toast.LENGTH_SHORT).show()
         }
 
         if (!binding.etEmailRegister.text.isNullOrBlank() && !binding.etPhoneRegister.text.isNullOrBlank() && !binding.etPasswordRegister.text.isNullOrBlank() && validationPassword(
                 binding.etPasswordRegister.text.toString().trim()
-            ) && (binding.etConfirmPasswordRegister.text.toString() == binding.etPasswordRegister.text.toString() && !format.isNullOrBlank())
+            ) && (binding.etConfirmPasswordRegister.text.toString() == binding.etPasswordRegister.text.toString() && !format.isNullOrBlank() && getAge(year.toInt(), month.toInt(), day.toInt()) >= 18)
         ) {
             sendDataToDatabase()
         }
@@ -108,6 +113,13 @@ class RegisterActivity : AppCompatActivity(), RegisterView {
         )
 
         presenter.insertUser(user)
+    }
+
+    fun getAge(year: Int, month: Int, dayOfMonth: Int): Int {
+        return Period.between(
+            LocalDate.of(year, month, dayOfMonth),
+            LocalDate.now()
+        ).years
     }
 
     private fun validationPassword(password: String): Boolean {

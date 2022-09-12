@@ -23,12 +23,6 @@ class NavigationActivity : AppCompatActivity() {
         binding = ActivityNavigationBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-//        binding.tvTitleTodayReport.setOnClickListener{
-//            SharedPreference(this).isLogout("isLogin")
-//            startActivity(Intent(this, LoginActivity::class.java))
-//            finish()
-//        }
-
         setupNavi()
     }
 

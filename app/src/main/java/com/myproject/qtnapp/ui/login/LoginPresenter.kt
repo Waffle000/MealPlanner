@@ -16,19 +16,24 @@ class LoginPresenter(private val repository: AppRepository, private val view: Lo
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
+                    Log.e("TAG", "$it")
                     if (it != null) {
                         view.successLogin(it)
+                    } else {
+                        view.errorLogin(true)
                     }
                 },this::onError)
         )
     }
 
     private fun onError(t:Throwable){
+        Log.e("TAG1", "$t")
         view.onError(t)
     }
 }
 
 interface LoginView {
     fun onError(t: Throwable)
+    fun errorLogin(failed: Boolean)
     fun successLogin(data: UserEntity)
 }

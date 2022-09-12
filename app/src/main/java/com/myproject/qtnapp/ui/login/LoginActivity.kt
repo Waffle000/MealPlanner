@@ -1,21 +1,14 @@
 package com.myproject.qtnapp.ui.login
 
 import android.content.Intent
+import android.database.Cursor
 import android.os.Bundle
 import android.widget.Toast
-import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContentProviderCompat.requireContext
-import androidx.navigation.findNavController
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.navigateUp
-import androidx.navigation.ui.setupActionBarWithNavController
-import com.myproject.qtnapp.R
 import com.myproject.qtnapp.data.local.entity.UserEntity
 import com.myproject.qtnapp.databinding.ActivityLoginBinding
 import com.myproject.qtnapp.di.SharedPreference
 import com.myproject.qtnapp.ui.category.CategoryActivity
-import com.myproject.qtnapp.ui.category.CategoryAdapter
 import com.myproject.qtnapp.ui.navi.NavigationActivity
 import com.myproject.qtnapp.ui.register.RegisterActivity
 import org.koin.android.ext.android.inject
@@ -33,6 +26,9 @@ class LoginActivity : AppCompatActivity(), LoginView {
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
         init()
+    }
+
+    private fun checkDbNull() {
     }
 
     private fun init() {
@@ -63,6 +59,12 @@ class LoginActivity : AppCompatActivity(), LoginView {
 
     override fun onError(t: Throwable) {
         Toast.makeText(this, "Error: $t", Toast.LENGTH_SHORT).show()
+    }
+
+    override fun errorLogin(failed: Boolean) {
+        if(failed) {
+            Toast.makeText(this, "Data tidak ditemukan", Toast.LENGTH_SHORT).show()
+        }
     }
 
     override fun successLogin(data: UserEntity) {

@@ -5,8 +5,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.myproject.qtnapp.R
 import com.myproject.qtnapp.databinding.FragmentHomeBinding
+import com.myproject.qtnapp.di.SharedPreference
 
 class HomeFragment : Fragment() {
 
@@ -19,7 +21,16 @@ class HomeFragment : Fragment() {
         return binding.root
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        setupRv()
+    }
+
+    private fun setupRv() {
+        val categoryData = SharedPreference(requireContext()).getCategoryData("category")
+        with(binding.rvMealByCategory) {
+            adapter = categoryData?.let { HomeAdapter(it) }
+            layoutManager = LinearLayoutManager(requireContext())
+        }
     }
 }
