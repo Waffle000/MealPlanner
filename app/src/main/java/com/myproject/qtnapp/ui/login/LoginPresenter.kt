@@ -17,17 +17,16 @@ class LoginPresenter(private val repository: AppRepository, private val view: Lo
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
-                    Log.e("TAG", "DATA$it")
-                    if (it != null) {
-                        view.successLogin(it)
-                    } else {
+                    if (it.isEmpty()) {
                         view.errorLogin(true)
+                    } else {
+                        it.map { user ->
+                            view.successLogin(user)
+                        }
                     }
                 }, this::onError)
         )
     }
-
-
 
     private fun onError(t: Throwable) {
         Log.e("TAG1", "$t")

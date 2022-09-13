@@ -26,11 +26,15 @@ class RegisterPresenter(private val repository: AppRepository, private val view:
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
-                   if (it == null) {
-                       Log.e("TAG","SUCCESS")
-                   } else {
-                       Log.e("TAG", "ERROR")
-                   }
+                    when(it.isNullOrEmpty()){
+                        true->{
+                            insertUser(user)
+                            Log.e("hehe", "checkEmail: $user", )
+                        }else->{
+                            Log.e("uhuy", "checkEmail: not null", )
+                            view.successInsert(false)
+                        }
+                    }
                 },this::onError)
         )
     }
