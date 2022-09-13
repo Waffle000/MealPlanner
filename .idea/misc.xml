@@ -3,6 +3,13 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Enrico Maricar/AndroidStudioProjects/qtnapp/app/src/main/res/layout/fragment_favorite.xml" value="0.2" />
+        <entry key="..\:/Users/Enrico Maricar/AndroidStudioProjects/qtnapp/app/src/main/res/layout/fragment_history.xml" value="0.33" />
+        <entry key="..\:/Users/Enrico Maricar/AndroidStudioProjects/qtnapp/app/src/main/res/layout/fragment_home.xml" value="0.5" />
+        <entry key="..\:/Users/Enrico Maricar/AndroidStudioProjects/qtnapp/app/src/main/res/layout/item_favorite.xml" value="0.5" />
+        <entry key="..\:/Users/Enrico Maricar/AndroidStudioProjects/qtnapp/app/src/main/res/layout/item_history.xml" value="0.33" />
+        <entry key="..\:/Users/Enrico Maricar/AndroidStudioProjects/qtnapp/app/src/main/res/layout/item_home.xml" value="0.18085106382978725" />
+        <entry key="..\:/Users/Enrico Maricar/AndroidStudioProjects/qtnapp/app/src/main/res/layout/item_home_horizontal.xml" value="0.75" />
         <entry key="..\:/Users/enric/AndroidStudioProjects/qtn-km-enricoolivianmaricar/app/src/main/res/drawable/bg_rounded_white.xml" value="0.2615" />
         <entry key="..\:/Users/enric/AndroidStudioProjects/qtn-km-enricoolivianmaricar/app/src/main/res/drawable/bg_rounded_white_stroke_black.xml" value="0.2615" />
         <entry key="..\:/Users/enric/AndroidStudioProjects/qtn-km-enricoolivianmaricar/app/src/main/res/layout/activity_category.xml" value="0.33" />

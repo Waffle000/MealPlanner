@@ -4,17 +4,18 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".ui.history.HistoryFragment">
+    tools:context=".ui.favorite.FavoriteFragment">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Your History"/>
+        android:text="Your Favorite Food"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_history"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:listitem="@layout/item_history"
+        tools:listitem="@layout/item_favorite"
         android:layout_marginTop="16dp"/>
+
 </LinearLayout>

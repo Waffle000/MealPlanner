@@ -19,9 +19,9 @@
 
     <fragment
         android:id="@+id/navigation_chat"
-        android:name="com.myproject.qtnapp.ui.chat.ChatFragment"
+        android:name="com.myproject.qtnapp.ui.favorite.FavoriteFragment"
         android:label="Chat"
-        tools:layout="@layout/fragment_chat" />
+        tools:layout="@layout/fragment_favorite" />
 
     <fragment
         android:id="@+id/navigation_profile"

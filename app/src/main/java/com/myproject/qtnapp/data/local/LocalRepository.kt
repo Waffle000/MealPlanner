@@ -1,5 +1,6 @@
 package com.myproject.qtnapp.data.local
 
+import com.myproject.qtnapp.data.local.entity.FoodByCategoryEntity
 import com.myproject.qtnapp.data.local.entity.UserEntity
 
 class LocalRepository(private val appDataBase: AppDataBase) {
@@ -32,5 +33,13 @@ class LocalRepository(private val appDataBase: AppDataBase) {
 
     fun updateUser(user: UserEntity) = getResult {
         appDataBase.userDao().updateUser(user)
+    }
+
+    fun insertFoodByCategory(list: List<FoodByCategoryEntity>) = getResult {
+        appDataBase.foodByCategoryDao().insertFoodByCategory(list)
+    }
+
+    fun getAllFoodCategory() = getResult {
+        appDataBase.foodByCategoryDao().getAllFood()
     }
 }

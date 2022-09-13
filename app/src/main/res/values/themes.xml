@@ -54,6 +54,12 @@
         <item name="android:textStyle">bold</item>
     </style>
 
+    <style name="TextViewHome.History" >
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:layout_marginBottom">8dp</item>
+    </style>
+
     <style name="TextViewHome" >
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>

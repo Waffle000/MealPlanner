@@ -2,7 +2,10 @@ package com.myproject.qtnapp.data.repository
 
 import android.util.Log
 import com.myproject.qtnapp.data.local.LocalRepository
+import com.myproject.qtnapp.data.local.dao.FoodByCategoryDao
+import com.myproject.qtnapp.data.local.entity.FoodByCategoryEntity
 import com.myproject.qtnapp.data.local.entity.UserEntity
+import com.myproject.qtnapp.data.model.response.FoodByCategoryResponse
 import com.myproject.qtnapp.data.remote.RemoteRepository
 import io.reactivex.Flowable
 import io.reactivex.Observable
@@ -21,4 +24,14 @@ class AppRepository(private val local: LocalRepository, private val remote: Remo
     }
 
     fun updateUser(user: UserEntity) = local.updateUser(user)
+
+    fun insertFoodByCategory(list: List<FoodByCategoryEntity>) = local.insertFoodByCategory(list)
+
+    fun getAllFoodByCategory() : Observable<List<FoodByCategoryEntity>> {
+        return local.getAllFoodCategory()
+    }
+
+    fun getFoodByCategoryremote(category: String) : Observable<FoodByCategoryResponse> {
+
+    }
 }
