@@ -1,10 +1,7 @@
 package com.myproject.qtnapp
 
 import android.app.Application
-import com.myproject.qtnapp.di.networkModule
-import com.myproject.qtnapp.di.presenterModule
-import com.myproject.qtnapp.di.repositoryModule
-import com.myproject.qtnapp.di.roomModule
+import com.myproject.qtnapp.di.*
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
@@ -16,7 +13,7 @@ class App: Application() {
         startKoin {
             androidLogger(if (BuildConfig.DEBUG) Level.ERROR else Level.NONE)
             androidContext(this@App)
-            modules(listOf(networkModule, presenterModule, repositoryModule, roomModule))
+            modules(listOf(networkModule, presenterModule, repositoryModule, roomModule, viewModelModule))
         }
     }
 }

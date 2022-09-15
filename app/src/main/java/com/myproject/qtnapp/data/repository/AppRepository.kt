@@ -13,25 +13,24 @@ import io.reactivex.Observable
 class AppRepository(private val local: LocalRepository, private val remote: RemoteRepository) {
     fun getCategories() = remote.getCategories()
 
-    fun insertUser(user: UserEntity) = local.insertUser(user)
+    suspend fun insertUser(user: UserEntity) = local.insertUser(user)
 
-    fun getDataLogin(email: String, password: String): Flowable<List<UserEntity>> {
+    suspend fun getDataLogin(email: String, password: String): UserEntity? {
         return local.getLogin(email, password)
     }
 
-    fun checkEmail(email: String): Observable<List<UserEntity?>> {
+    suspend fun checkEmail(email: String): UserEntity? {
         return local.checkEmail(email)
     }
 
-    fun updateUser(user: UserEntity) = local.updateUser(user)
+    suspend fun updateUser(user: UserEntity) = local.updateUser(user)
 
-    fun insertFoodByCategory(list: List<FoodByCategoryEntity>) = local.insertFoodByCategory(list)
+    suspend fun insertFoodByCategory(list: List<FoodByCategoryEntity>) = local.insertFoodByCategory(list)
 
-    fun getAllFoodByCategory() : Observable<List<FoodByCategoryEntity>> {
+    suspend fun getAllFoodByCategory() : List<FoodByCategoryEntity> {
         return local.getAllFoodCategory()
     }
 
-    fun getFoodByCategoryremote(category: String) : Observable<FoodByCategoryResponse> {
-
-    }
+//    fun getFoodByCategoryremote(category: String) : Observable<FoodByCategoryResponse> {
+//    }
 }

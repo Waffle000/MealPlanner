@@ -5,41 +5,32 @@ import com.myproject.qtnapp.data.local.entity.UserEntity
 
 class LocalRepository(private val appDataBase: AppDataBase) {
 
-    private fun <T> getResult(request: () -> T): T {
+    private suspend fun <T> getResult(request: suspend () -> T): T {
         val res = request.invoke()
         return res
     }
 
-    private suspend fun <T> getResultSus(request: suspend () -> T): T {
-        val res = request.invoke()
-        return res
-    }
-
-    fun insertUser(user: UserEntity) = getResult {
+    suspend fun insertUser(user: UserEntity) = getResult {
         appDataBase.userDao().insertUser(user)
     }
 
-    fun getLogin(email: String, password: String) = getResult {
+    suspend fun getLogin(email: String, password: String) = getResult {
         appDataBase.userDao().getDataLogin(email, password)
     }
 
-    suspend fun getLoginSus(email: String, password: String) = getResultSus {
-        appDataBase.userDao().getDataLoginSus(email, password)
-    }
-
-    fun checkEmail(email: String) = getResult {
+    suspend fun checkEmail(email: String) = getResult {
         appDataBase.userDao().checkEmail(email)
     }
 
-    fun updateUser(user: UserEntity) = getResult {
+    suspend fun updateUser(user: UserEntity) = getResult {
         appDataBase.userDao().updateUser(user)
     }
 
-    fun insertFoodByCategory(list: List<FoodByCategoryEntity>) = getResult {
+    suspend fun insertFoodByCategory(list: List<FoodByCategoryEntity>) = getResult {
         appDataBase.foodByCategoryDao().insertFoodByCategory(list)
     }
 
-    fun getAllFoodCategory() = getResult {
+    suspend fun getAllFoodCategory() = getResult {
         appDataBase.foodByCategoryDao().getAllFood()
     }
 }

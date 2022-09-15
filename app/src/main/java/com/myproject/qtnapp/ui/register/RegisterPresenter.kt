@@ -28,11 +28,9 @@ class RegisterPresenter(private val repository: AppRepository, private val view:
                 .subscribe({
                     when(it.isNullOrEmpty()){
                         true->{
-                            insertUser(user)
-                            Log.e("hehe", "checkEmail: $user", )
+                            view.successCheckEmail(true, user)
                         }else->{
-                            Log.e("uhuy", "checkEmail: not null", )
-                            view.successInsert(false)
+                            view.successCheckEmail(false, user)
                         }
                     }
                 },this::onError)
@@ -46,5 +44,6 @@ class RegisterPresenter(private val repository: AppRepository, private val view:
 
 interface RegisterView {
     fun onError(t: Throwable)
+    fun successCheckEmail(success: Boolean, user: UserEntity)
     fun successInsert(success : Boolean)
 }

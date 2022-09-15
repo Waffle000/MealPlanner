@@ -45,7 +45,7 @@ class RegisterActivity : AppCompatActivity(), RegisterView {
                 { view, year, month, dayOfMonth ->
                     dateTime.set(year, month, dayOfMonth)
                     format = SimpleDateFormat("dd/MM/yyyy").format(dateTime.time)
-                    binding.tvBirtdateRegister.text = format
+                    binding.tvBirtdateRegister.setText(format)
                 },
                 currentDate[Calendar.YEAR],
                 currentDate[Calendar.MONTH],
@@ -156,12 +156,18 @@ class RegisterActivity : AppCompatActivity(), RegisterView {
         Toast.makeText(this, "Error $t", Toast.LENGTH_SHORT).show()
     }
 
+    override fun successCheckEmail(success: Boolean, user: UserEntity) {
+        if(success) {
+            presenter.insertUser(user)
+        } else {
+            Toast.makeText(this, "Email sudah terdaftar", Toast.LENGTH_SHORT).show()
+        }
+    }
+
     override fun successInsert(success: Boolean) {
         if (success) {
             startActivity(Intent(this, LoginActivity::class.java))
             finish()
-        } else {
-            Toast.makeText(this, "Email sudah terdaftar", Toast.LENGTH_SHORT).show()
         }
     }
 }

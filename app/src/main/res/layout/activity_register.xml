@@ -72,13 +72,14 @@
         android:layout_marginBottom="8dp"
         android:textStyle="bold"/>
 
-    <TextView
+    <EditText
         android:id="@+id/tv_birtdate_register"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="textEmailAddress"
         android:hint="12-12-1991"
         android:layout_marginBottom="20dp"
+        android:focusable="false"
         style="@style/EditTextPrimary"/>
 
     <TextView

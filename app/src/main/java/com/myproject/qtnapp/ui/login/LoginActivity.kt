@@ -5,6 +5,8 @@ import android.database.Cursor
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModel
 import com.myproject.qtnapp.data.local.entity.UserEntity
 import com.myproject.qtnapp.databinding.ActivityLoginBinding
 import com.myproject.qtnapp.di.SharedPreference
@@ -14,21 +16,17 @@ import com.myproject.qtnapp.ui.register.RegisterActivity
 import org.koin.android.ext.android.inject
 import org.koin.core.parameter.parametersOf
 
-class LoginActivity : AppCompatActivity(), LoginView {
+class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
 
-    private val presenter: LoginPresenter by inject {
-        parametersOf(this)
-    }
+    private val viewModel: LoginViewModel by inject()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
         init()
-    }
-
-    private fun checkDbNull() {
+        observeData()
     }
 
     private fun init() {
@@ -44,7 +42,7 @@ class LoginActivity : AppCompatActivity(), LoginView {
                 }
 
                 if (!etEmailLogin.text.isNullOrBlank() && !etPassLogin.text.isNullOrBlank()) {
-                    presenter.getDataLogin(
+                    viewModel.getDataLogin(
                         etEmailLogin.text.toString(),
                         etPassLogin.text.toString()
                     )
@@ -57,32 +55,29 @@ class LoginActivity : AppCompatActivity(), LoginView {
         }
     }
 
-    override fun onError(t: Throwable) {
-        Toast.makeText(this, "Error: $t", Toast.LENGTH_SHORT).show()
-    }
-
-    override fun errorLogin(failed: Boolean) {
-        if(failed) {
-            Toast.makeText(this, "Data tidak ditemukan", Toast.LENGTH_SHORT).show()
+    private fun observeData() {
+        with(viewModel) {
+            observeIsLogin().observe(this@LoginActivity, Observer {
+                it.getContentIfNotHandled()?.let { data ->
+                    if(data != null) {
+                        if (data.newUser) {
+                            startActivity(
+                                Intent(
+                                    this@LoginActivity,
+                                    CategoryActivity::class.java
+                                ).putExtra(CategoryActivity.USER_DATA, data)
+                            )
+                            finish()
+                        } else {
+                            startActivity(Intent(this@LoginActivity, NavigationActivity::class.java))
+                            finish()
+                        }
+                    } else {
+                        Toast.makeText(this@LoginActivity, "Data tidak ditemukan", Toast.LENGTH_SHORT).show()
+                    }
+                }
+            })
         }
-    }
-
-    override fun successLogin(data: UserEntity) {
-        if (data.newUser) {
-            startActivity(
-                Intent(
-                    this,
-                    CategoryActivity::class.java
-                ).putExtra(CategoryActivity.USER_DATA, data)
-            )
-            finish()
-        } else {
-            startActivity(Intent(this, NavigationActivity::class.java))
-            finish()
-        }
-
-        val sharedPreference = SharedPreference(this)
-        sharedPreference.isLogin("isLogin", true)
     }
 
     override fun onStart() {

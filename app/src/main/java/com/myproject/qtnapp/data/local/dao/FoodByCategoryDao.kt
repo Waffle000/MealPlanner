@@ -11,8 +11,8 @@ import io.reactivex.Observable
 @Dao
 interface FoodByCategoryDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertFoodByCategory(list: List<FoodByCategoryEntity>): Completable
+    fun insertFoodByCategory(list: List<FoodByCategoryEntity>)
 
     @Query("SELECT * FROM food_db")
-    fun getAllFood() : Observable<List<FoodByCategoryEntity>>
+    fun getAllFood() : List<FoodByCategoryEntity>
 }

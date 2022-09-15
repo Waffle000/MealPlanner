@@ -10,17 +10,14 @@ import java.util.concurrent.Flow
 @Dao
 interface UserDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertUser(user: UserEntity) : Completable
+    suspend fun insertUser(user: UserEntity)
 
     @Query("SELECT * FROM user_db WHERE email= :email AND password= :password")
-    fun getDataLogin(email: String, password: String) : Flowable<List<UserEntity>>
-
-    @Query("SELECT * FROM user_db WHERE email= :email AND password= :password")
-    suspend fun getDataLoginSus(email: String, password: String) : UserEntity?
+    suspend fun getDataLogin(email: String, password: String) : UserEntity?
 
     @Query("SELECT * FROM user_db WHERE email= :email")
-    fun checkEmail(email: String) : Observable<List<UserEntity?>>
+    suspend fun checkEmail(email: String) : UserEntity?
 
     @Update
-    fun updateUser(user: UserEntity) : Completable
+    suspend fun updateUser(user: UserEntity)
 }
