@@ -8,6 +8,7 @@ import com.myproject.qtnapp.BaseViewModel
 import com.myproject.qtnapp.data.local.entity.UserEntity
 import com.myproject.qtnapp.data.repository.AppRepository
 import com.myproject.qtnapp.utils.SingleLiveEvent
+import io.reactivex.Single
 import kotlinx.coroutines.launch
 
 class RegisterViewModel(private val repository: AppRepository ): BaseViewModel() {
@@ -17,8 +18,8 @@ class RegisterViewModel(private val repository: AppRepository ): BaseViewModel()
     fun insertUser(user: UserEntity) {
         viewModelScope.launch {
             try {
-                val result = repository.insertUser(user)
-                Log.e("TAG", "$result")
+                repository.insertUser(user)
+                isRegister.postValue(SingleLiveEvent(true))
             } catch (e: Throwable) {
                 isError.postValue(SingleLiveEvent(e.toString()))
             }
@@ -32,7 +33,7 @@ class RegisterViewModel(private val repository: AppRepository ): BaseViewModel()
                 if(result == null) {
                     insertUser(user)
                 } else {
-
+                    isRegister.postValue(SingleLiveEvent(false))
                 }
             } catch (e: Throwable) {
                 isError.postValue(SingleLiveEvent(e.toString()))

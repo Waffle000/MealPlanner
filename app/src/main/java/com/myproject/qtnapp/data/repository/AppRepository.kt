@@ -11,9 +11,11 @@ import io.reactivex.Flowable
 import io.reactivex.Observable
 
 class AppRepository(private val local: LocalRepository, private val remote: RemoteRepository) {
-    fun getCategories() = remote.getCategories()
+    suspend fun getCategories() = remote.getCategories()
 
-    suspend fun insertUser(user: UserEntity) = local.insertUser(user)
+    suspend fun insertUser(user: UserEntity) {
+        local.insertUser(user)
+    }
 
     suspend fun getDataLogin(email: String, password: String): UserEntity? {
         return local.getLogin(email, password)

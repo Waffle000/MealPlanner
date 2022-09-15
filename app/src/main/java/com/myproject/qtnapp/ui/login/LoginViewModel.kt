@@ -1,5 +1,6 @@
 package com.myproject.qtnapp.ui.login
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
@@ -16,8 +17,8 @@ class LoginViewModel(private val repository: AppRepository) : BaseViewModel() {
 
     fun getDataLogin(email: String, password:String) {
         viewModelScope.launch {
-            val result = repository.getDataLogin(email, password)
             try {
+                val result = repository.getDataLogin(email, password)
                 isLogin.postValue(SingleLiveEvent(result))
             } catch(e: Throwable) {
                 isError.postValue(SingleLiveEvent(e.toString()))

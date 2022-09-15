@@ -78,6 +78,7 @@
         android:layout_height="wrap_content"
         android:inputType="textEmailAddress"
         android:hint="12-12-1991"
+        android:cursorVisible="false"
         android:layout_marginBottom="20dp"
         android:focusable="false"
         style="@style/EditTextPrimary"/>

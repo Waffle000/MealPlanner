@@ -17,11 +17,9 @@ import com.myproject.qtnapp.ui.navi.NavigationActivity
 import org.koin.android.ext.android.inject
 import org.koin.core.parameter.parametersOf
 
-class CategoryActivity : AppCompatActivity(), CategoryView, CategoryAdapter.onItemClick {
+class CategoryActivity : AppCompatActivity(), CategoryAdapter.onItemClick {
 
-    private val presenter : CategoryPresenter by inject{
-        parametersOf(this)
-    }
+    private val viewModel: CategoryViewModel by inject()
 
     private val category: MutableSet<String> = mutableSetOf()
 
@@ -32,8 +30,9 @@ class CategoryActivity : AppCompatActivity(), CategoryView, CategoryAdapter.onIt
         super.onCreate(savedInstanceState)
         binding = ActivityCategoryBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        presenter.getCategories()
+        viewModel.getCategoryRemote()
         init()
+        observeData()
     }
 
     private fun init() {
@@ -43,19 +42,21 @@ class CategoryActivity : AppCompatActivity(), CategoryView, CategoryAdapter.onIt
             sharedPreference.categoryData("category", category)
             userData?.newUser = false
             if (userData != null) {
-                presenter.updateUser(userData)
+                viewModel.updateUser(userData)
             }
             startActivity(Intent(this, NavigationActivity::class.java))
         }
     }
 
-    override fun getCategories(data: CategoriesResponse) {
-        listCategory = listCategory + data.categories
-        setupRV()
-    }
-
-    override fun updateUser(success: Boolean) {
-
+    private fun observeData() {
+        with(viewModel) {
+            observeGetCategory().observe(this@CategoryActivity) {
+                it.getContentIfNotHandled()?.let { data ->
+                    listCategory = listCategory + data.categories
+                    setupRV()
+                }
+            }
+        }
     }
 
     private fun setupRV() {

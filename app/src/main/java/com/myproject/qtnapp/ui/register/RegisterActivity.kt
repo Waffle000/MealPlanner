@@ -6,27 +6,23 @@ import android.os.Bundle
 import android.util.Patterns
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.myproject.qtnapp.R
 import com.myproject.qtnapp.data.local.entity.UserEntity
 import com.myproject.qtnapp.databinding.ActivityRegisterBinding
 import com.myproject.qtnapp.ui.login.LoginActivity
 import org.koin.android.ext.android.inject
-import org.koin.core.parameter.parametersOf
 import java.text.SimpleDateFormat
 import java.time.LocalDate
 import java.time.Period
 import java.util.*
 import java.util.regex.Pattern
 
-class RegisterActivity : AppCompatActivity(), RegisterView {
+class RegisterActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityRegisterBinding
 
     private var format: String? = null
 
-    private val presenter: RegisterPresenter by inject {
-        parametersOf(this)
-    }
+    private val viewModel: RegisterViewModel by inject()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,6 +30,22 @@ class RegisterActivity : AppCompatActivity(), RegisterView {
         setContentView(binding.root)
         init()
         register()
+        observeData()
+    }
+
+    private fun observeData() {
+        with(viewModel) {
+            observeIsRegister().observe(this@RegisterActivity) {
+                it.getContentIfNotHandled()?.let { success ->
+                    if(success) {
+                        startActivity(Intent(this@RegisterActivity, LoginActivity::class.java))
+                        finish()
+                    } else {
+                        Toast.makeText(this@RegisterActivity, "Email sudah terdaftar", Toast.LENGTH_SHORT).show()
+                    }
+                }
+            }
+        }
     }
 
     private fun init() {
@@ -124,7 +136,7 @@ class RegisterActivity : AppCompatActivity(), RegisterView {
             newUser = true
         )
 
-        presenter.checkEmail(user)
+        viewModel.checkingEmail(user)
     }
 
     fun getAge(year: Int, month: Int, dayOfMonth: Int): Int {
@@ -151,23 +163,4 @@ class RegisterActivity : AppCompatActivity(), RegisterView {
 
     private fun CharSequence?.isValidEmail() =
         !isNullOrEmpty() && Patterns.EMAIL_ADDRESS.matcher(this).matches()
-
-    override fun onError(t: Throwable) {
-        Toast.makeText(this, "Error $t", Toast.LENGTH_SHORT).show()
-    }
-
-    override fun successCheckEmail(success: Boolean, user: UserEntity) {
-        if(success) {
-            presenter.insertUser(user)
-        } else {
-            Toast.makeText(this, "Email sudah terdaftar", Toast.LENGTH_SHORT).show()
-        }
-    }
-
-    override fun successInsert(success: Boolean) {
-        if (success) {
-            startActivity(Intent(this, LoginActivity::class.java))
-            finish()
-        }
-    }
 }

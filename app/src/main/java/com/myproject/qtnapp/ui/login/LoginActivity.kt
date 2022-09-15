@@ -3,6 +3,7 @@ package com.myproject.qtnapp.ui.login
 import android.content.Intent
 import android.database.Cursor
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
@@ -57,8 +58,8 @@ class LoginActivity : AppCompatActivity() {
 
     private fun observeData() {
         with(viewModel) {
-            observeIsLogin().observe(this@LoginActivity, Observer {
-                it.getContentIfNotHandled()?.let { data ->
+            observeIsLogin().observe(this@LoginActivity) {
+                it.getContentIfNotHandled().let { data ->
                     if(data != null) {
                         if (data.newUser) {
                             startActivity(
@@ -76,7 +77,7 @@ class LoginActivity : AppCompatActivity() {
                         Toast.makeText(this@LoginActivity, "Data tidak ditemukan", Toast.LENGTH_SHORT).show()
                     }
                 }
-            })
+            }
         }
     }
 

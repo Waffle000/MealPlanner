@@ -13,7 +13,7 @@ class App: Application() {
         startKoin {
             androidLogger(if (BuildConfig.DEBUG) Level.ERROR else Level.NONE)
             androidContext(this@App)
-            modules(listOf(networkModule, presenterModule, repositoryModule, roomModule, viewModelModule))
+            modules(listOf(networkModule, repositoryModule, roomModule, viewModelModule))
         }
     }
 }
