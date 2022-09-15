@@ -3,9 +3,9 @@ package com.myproject.qtnapp.ui.category
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.myproject.qtnapp.BaseViewModel
+import com.myproject.qtnapp.base.BaseViewModel
+import com.myproject.qtnapp.base.ResponseResult
 import com.myproject.qtnapp.data.local.entity.UserEntity
-import com.myproject.qtnapp.data.model.response.Categories
 import com.myproject.qtnapp.data.model.response.CategoriesResponse
 import com.myproject.qtnapp.data.repository.AppRepository
 import com.myproject.qtnapp.utils.SingleLiveEvent
@@ -20,8 +20,15 @@ class CategoryViewModel(private val repository: AppRepository) : BaseViewModel()
 
     fun getCategoryRemote() {
         viewModelScope.launch {
-            val result = repository.getCategories()
-            getCategorySuccess.postValue(SingleLiveEvent(result))
+            when(val result = repository.getCategories()) {
+                is ResponseResult.Success -> {
+                    getCategorySuccess.postValue(SingleLiveEvent(result.data))
+                }
+                is ResponseResult.Error -> {
+                    isError.postValue(SingleLiveEvent(result.errorMsg ?: ""))
+                }
+            }
+
         }
     }
 

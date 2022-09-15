@@ -71,6 +71,8 @@ class LoginActivity : AppCompatActivity() {
                             finish()
                         } else {
                             startActivity(Intent(this@LoginActivity, NavigationActivity::class.java))
+                            val sharedPreference = SharedPreference(this@LoginActivity)
+                            sharedPreference.isLogin("isLogin", true)
                             finish()
                         }
                     } else {

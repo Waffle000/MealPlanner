@@ -1,5 +1,6 @@
 package com.myproject.qtnapp.di
 
+import com.google.gson.GsonBuilder
 import com.myproject.qtnapp.data.remote.WebService
 import io.reactivex.schedulers.Schedulers
 import okhttp3.OkHttpClient

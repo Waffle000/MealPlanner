@@ -21,6 +21,7 @@
             android:src="@drawable/img_beef"/>
 
         <TextView
+            android:id="@+id/tv_food_item_home"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Portuguese prego with green piri-piri"

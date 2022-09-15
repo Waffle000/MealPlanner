@@ -24,5 +24,11 @@ class UserEntity(
     @ColumnInfo(name = "birthdate")
     val birthdate: String?,
     @ColumnInfo(name = "new_user")
-    var newUser: Boolean
+    var newUser: Boolean,
+    @ColumnInfo(name = "total_fat")
+    var totalFat: Int?,
+    @ColumnInfo(name = "total_pro")
+    var totalPro: Int?,
+    @ColumnInfo(name = "total_carb")
+    var totalCarb: Int?
 ) : Parcelable

@@ -4,11 +4,11 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.myproject.qtnapp.BaseViewModel
+import com.myproject.qtnapp.base.BaseViewModel
+import com.myproject.qtnapp.base.ResponseResult
 import com.myproject.qtnapp.data.local.entity.UserEntity
 import com.myproject.qtnapp.data.repository.AppRepository
 import com.myproject.qtnapp.utils.SingleLiveEvent
-import io.reactivex.Single
 import kotlinx.coroutines.launch
 
 class RegisterViewModel(private val repository: AppRepository ): BaseViewModel() {
@@ -28,17 +28,18 @@ class RegisterViewModel(private val repository: AppRepository ): BaseViewModel()
 
     fun checkingEmail(user: UserEntity) {
         viewModelScope.launch {
-            try {
-                val result = repository.checkEmail(user.email ?: "")
-                if(result == null) {
-                    insertUser(user)
-                } else {
-                    isRegister.postValue(SingleLiveEvent(false))
+            when(val result = repository.checkEmail(user.email ?: "")) {
+                is ResponseResult.Success -> {
+                    if(result.data == null) {
+                        insertUser(user)
+                    } else {
+                        isRegister.postValue(SingleLiveEvent(false))
+                    }
                 }
-            } catch (e: Throwable) {
-                isError.postValue(SingleLiveEvent(e.toString()))
+                is ResponseResult.Error -> {
+                    isError.postValue(SingleLiveEvent(result.errorMsg ?: ""))
+                }
             }
-
         }
     }
 }

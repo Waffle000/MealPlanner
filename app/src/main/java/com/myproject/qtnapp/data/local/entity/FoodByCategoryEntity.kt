@@ -17,5 +17,13 @@ class FoodByCategoryEntity(
     @ColumnInfo(name = "image_link")
     val imageLink: String?,
     @ColumnInfo(name = "category")
-    val category: String?
+    val category: String?,
+    @ColumnInfo(name = "fat")
+    val fat: Int?,
+    @ColumnInfo(name = "pro")
+    val pro: Int?,
+    @ColumnInfo(name = "carb")
+    val carb: Int?,
+    @ColumnInfo(name = "isFav")
+    val isFav: Boolean
 ) : Parcelable

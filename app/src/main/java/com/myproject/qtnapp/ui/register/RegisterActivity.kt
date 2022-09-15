@@ -2,9 +2,11 @@ package com.myproject.qtnapp.ui.register
 
 import android.app.DatePickerDialog
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.util.Patterns
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import com.myproject.qtnapp.data.local.entity.UserEntity
 import com.myproject.qtnapp.databinding.ActivityRegisterBinding
@@ -133,7 +135,10 @@ class RegisterActivity : AppCompatActivity() {
             phoneNumber = binding.etPhoneRegister.text.toString(),
             password = binding.etPasswordRegister.text.toString(),
             birthdate = format,
-            newUser = true
+            newUser = true,
+            totalFat = 0,
+            totalPro = 0,
+            totalCarb = 0
         )
 
         viewModel.checkingEmail(user)

@@ -1,4 +1,4 @@
-package com.myproject.qtnapp
+package com.myproject.qtnapp.base
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

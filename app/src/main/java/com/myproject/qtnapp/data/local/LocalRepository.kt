@@ -1,13 +1,18 @@
 package com.myproject.qtnapp.data.local
 
+import com.myproject.qtnapp.base.ResponseResult
 import com.myproject.qtnapp.data.local.entity.FoodByCategoryEntity
 import com.myproject.qtnapp.data.local.entity.UserEntity
 
 class LocalRepository(private val appDataBase: AppDataBase) {
 
-    private suspend fun <T> getResult(request: suspend () -> T): T {
-        val res = request.invoke()
-        return res
+    private suspend fun <T> getResult(request: suspend () -> T): ResponseResult<T> {
+        return try {
+            val res = request.invoke()
+            ResponseResult.Success(res)
+        } catch (e: Exception) {
+            ResponseResult.Error(errorMsg = e.toString())
+        }
     }
 
     suspend fun insertUser(user: UserEntity) = getResult {
@@ -32,5 +37,9 @@ class LocalRepository(private val appDataBase: AppDataBase) {
 
     suspend fun getAllFoodCategory() = getResult {
         appDataBase.foodByCategoryDao().getAllFood()
+    }
+
+    suspend fun deleteAllFood() = getResult {
+        appDataBase.foodByCategoryDao().deleteAllFood()
     }
 }
