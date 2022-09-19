@@ -7,7 +7,7 @@ import io.reactivex.Observable
 
 @Dao
 interface FoodByCategoryDao {
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    @Insert(onConflict = OnConflictStrategy.ABORT)
     suspend fun insertFoodByCategory(list: List<FoodByCategoryEntity>)
 
     @Query("SELECT * FROM food_db")

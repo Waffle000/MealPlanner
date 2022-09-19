@@ -11,6 +11,7 @@ import com.myproject.qtnapp.R
 import com.myproject.qtnapp.data.local.entity.FoodByCategoryEntity
 import com.myproject.qtnapp.databinding.FragmentHomeBinding
 import com.myproject.qtnapp.di.SharedPreference
+import com.myproject.qtnapp.ui.calorie.CalorieActivity
 import com.myproject.qtnapp.ui.meal.MealActivity
 import org.koin.android.ext.android.inject
 
@@ -30,6 +31,9 @@ class HomeFragment : Fragment(), HomeHorizontalAdapter.onItemClick {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         observeData()
+        binding.tvTitleCalories.setOnClickListener {
+            startActivity(Intent(activity, CalorieActivity::class.java))
+        }
         val categoryData = SharedPreference(requireContext()).getCategoryData("category")
         if (categoryData != null) {
             viewModel.getFoodByCategory(categoryData)
