@@ -14,10 +14,59 @@ class SharedPreference(context: Context) {
         editor.apply()
     }
 
+    fun timeStamp(time_key: String, time: String) {
+        val editor: SharedPreferences.Editor = sharedPreferences.edit()
+        editor.putString(time_key, time)
+        editor.apply()
+    }
+
+    fun proTotal(pro_key: String, pro: Int) {
+        val editor: SharedPreferences.Editor = sharedPreferences.edit()
+        editor.putInt(pro_key, pro)
+        editor.apply()
+    }
+
+    fun carbTotal(carb_key: String, carb: Int) {
+        val editor: SharedPreferences.Editor = sharedPreferences.edit()
+        editor.putInt(carb_key, carb)
+        editor.apply()
+    }
+
+    fun fatTotal(fat_key: String, fat: Int) {
+        val editor: SharedPreferences.Editor = sharedPreferences.edit()
+        editor.putInt(fat_key, fat)
+        editor.apply()
+    }
+
+    fun calorieTotal(calorie_key: String, calorie: Int) {
+        val editor: SharedPreferences.Editor = sharedPreferences.edit()
+        editor.putInt(calorie_key, calorie)
+        editor.apply()
+    }
     fun categoryData(category_key: String, category: MutableSet<String>) {
         val editor: SharedPreferences.Editor = sharedPreferences.edit()
         editor.putStringSet(category_key, category)
         editor.apply()
+    }
+
+    fun etTimeStamp(time_key: String) : String? {
+        return sharedPreferences.getString(time_key, "")
+    }
+
+    fun getCalorieData(calorie_key: String) : Int {
+        return sharedPreferences.getInt(calorie_key, 0)
+    }
+
+    fun getProData(pro_key: String) : Int {
+        return sharedPreferences.getInt(pro_key, 0)
+    }
+
+    fun getCarbData(carb_key: String) : Int {
+        return sharedPreferences.getInt(carb_key, 0)
+    }
+
+    fun getFatData(fat_key: String) : Int {
+        return sharedPreferences.getInt(fat_key, 0)
     }
 
     fun getCategoryData(category_key: String): MutableSet<String>? {

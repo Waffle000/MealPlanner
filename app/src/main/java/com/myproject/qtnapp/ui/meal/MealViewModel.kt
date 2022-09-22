@@ -1,10 +1,13 @@
 package com.myproject.qtnapp.ui.meal
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.myproject.qtnapp.base.BaseViewModel
 import com.myproject.qtnapp.base.ResponseResult
+import com.myproject.qtnapp.data.local.entity.FoodByCategoryEntity
+import com.myproject.qtnapp.data.local.entity.UserEntity
 import com.myproject.qtnapp.data.model.response.FoodDetailResponse
 import com.myproject.qtnapp.data.repository.AppRepository
 import com.myproject.qtnapp.utils.SingleLiveEvent
@@ -26,6 +29,13 @@ class MealViewModel(private val repository: AppRepository): BaseViewModel() {
                     isError.postValue(SingleLiveEvent(result.errorMsg ?: ""))
                 }
             }
+        }
+    }
+
+    fun updateFood(food: FoodByCategoryEntity) {
+        viewModelScope.launch {
+            Log.e("GAGAGA", "updateFood: $food", )
+            repository.updateFood(food)
         }
     }
 }

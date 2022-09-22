@@ -1,6 +1,7 @@
 package com.myproject.qtnapp.di
 
 import com.myproject.qtnapp.ui.category.CategoryViewModel
+import com.myproject.qtnapp.ui.favorite.FavoriteViewModel
 import com.myproject.qtnapp.ui.home.HomeViewModel
 import com.myproject.qtnapp.ui.login.LoginViewModel
 import com.myproject.qtnapp.ui.meal.MealViewModel
@@ -14,4 +15,5 @@ val viewModelModule = module {
     single { CategoryViewModel(get()) }
     single { HomeViewModel(get()) }
     single { MealViewModel(get()) }
+    single { FavoriteViewModel(get()) }
 }

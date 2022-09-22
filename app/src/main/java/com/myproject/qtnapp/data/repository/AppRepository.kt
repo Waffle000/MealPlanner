@@ -38,6 +38,12 @@ class AppRepository(private val local: LocalRepository, private val remote: Remo
         return local.getAllFoodCategory()
     }
 
+    suspend fun getFavoriteFood() : ResponseResult<List<FoodByCategoryEntity>> {
+        return local.getFavoriteFood()
+    }
+
+    suspend fun updateFood(food: FoodByCategoryEntity) = local.updateFood(food)
+
     suspend fun deleteAllFood() = local.deleteAllFood()
 
     suspend fun getCategories() : ResponseResult<CategoriesResponse> {

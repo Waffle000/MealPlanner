@@ -39,6 +39,14 @@ class LocalRepository(private val appDataBase: AppDataBase) {
         appDataBase.foodByCategoryDao().getAllFood()
     }
 
+    suspend fun getFavoriteFood() = getResult {
+        appDataBase.foodByCategoryDao().getFavoriteFood()
+    }
+
+    suspend fun updateFood(food: FoodByCategoryEntity) = getResult {
+        appDataBase.foodByCategoryDao().updateFood(food)
+    }
+
     suspend fun deleteAllFood() = getResult {
         appDataBase.foodByCategoryDao().deleteAllFood()
     }

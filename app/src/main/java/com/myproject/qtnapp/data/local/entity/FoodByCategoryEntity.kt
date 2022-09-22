@@ -25,5 +25,5 @@ class FoodByCategoryEntity(
     @ColumnInfo(name = "carb")
     val carb: Int?,
     @ColumnInfo(name = "isFav")
-    val isFav: Boolean
+    var isFav: Boolean
 ) : Parcelable

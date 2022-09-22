@@ -34,7 +34,7 @@ class CategoryViewModel(private val repository: AppRepository) : BaseViewModel()
 
     fun updateUser(user: UserEntity) {
         viewModelScope.launch {
-            val result = repository.updateUser(user)
+            repository.updateUser(user)
             updateUser.postValue(SingleLiveEvent(true))
         }
     }
