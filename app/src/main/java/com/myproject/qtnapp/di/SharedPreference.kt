@@ -49,7 +49,7 @@ class SharedPreference(context: Context) {
         editor.apply()
     }
 
-    fun etTimeStamp(time_key: String) : String? {
+    fun getTimeStamp(time_key: String) : String? {
         return sharedPreferences.getString(time_key, "")
     }
 
@@ -74,6 +74,21 @@ class SharedPreference(context: Context) {
     }
     fun getIsLogin(login_key: String) : Boolean {
         return sharedPreferences.getBoolean(login_key, false)
+    }
+
+    fun clearPro(pro_key: String) {
+        val editor: SharedPreferences.Editor = sharedPreferences.edit()
+        editor.remove(pro_key).apply()
+    }
+
+    fun clearCarb(carb_key: String) {
+        val editor: SharedPreferences.Editor = sharedPreferences.edit()
+        editor.remove(carb_key).apply()
+    }
+
+    fun clearFat(fat_key: String) {
+        val editor: SharedPreferences.Editor = sharedPreferences.edit()
+        editor.remove(fat_key).apply()
     }
 
     fun isLogout(login_key: String) {

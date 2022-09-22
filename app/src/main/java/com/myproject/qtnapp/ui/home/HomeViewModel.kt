@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.myproject.qtnapp.base.BaseViewModel
 import com.myproject.qtnapp.base.ResponseResult
 import com.myproject.qtnapp.data.local.entity.FoodByCategoryEntity
+import com.myproject.qtnapp.data.local.entity.HistoryEntity
 import com.myproject.qtnapp.data.repository.AppRepository
 import com.myproject.qtnapp.utils.SingleLiveEvent
 import io.reactivex.Single
@@ -71,6 +72,12 @@ class HomeViewModel(private val repository: AppRepository): BaseViewModel() {
                     isError.postValue(SingleLiveEvent(result.errorMsg ?: ""))
                 }
             }
+        }
+    }
+
+    fun insertHistory(history: HistoryEntity) {
+        viewModelScope.launch {
+            repository.insertHistory(history)
         }
     }
 }

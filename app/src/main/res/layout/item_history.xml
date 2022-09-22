@@ -15,6 +15,7 @@
         android:padding="16dp">
 
         <TextView
+            android:id="@+id/tv_date_history"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             tools:text="26 Agustus 2022"

@@ -5,6 +5,7 @@ import com.myproject.qtnapp.base.ResponseResult
 import com.myproject.qtnapp.data.local.LocalRepository
 import com.myproject.qtnapp.data.local.dao.FoodByCategoryDao
 import com.myproject.qtnapp.data.local.entity.FoodByCategoryEntity
+import com.myproject.qtnapp.data.local.entity.HistoryEntity
 import com.myproject.qtnapp.data.local.entity.UserEntity
 import com.myproject.qtnapp.data.model.response.CategoriesResponse
 import com.myproject.qtnapp.data.model.response.FoodByCategoryResponse
@@ -56,6 +57,12 @@ class AppRepository(private val local: LocalRepository, private val remote: Remo
 
     suspend fun getFoodDetail(mealId: String): ResponseResult<FoodDetailResponse> {
         return remote.getFoodDetail(mealId)
+    }
+
+    suspend fun insertHistory(history : HistoryEntity) = local.insertHistory(history)
+
+    suspend fun getHistory(): ResponseResult<List<HistoryEntity>> {
+        return local.getHistory()
     }
 
 //    fun getFoodByCategoryremote(category: String) : Observable<FoodByCategoryResponse> {

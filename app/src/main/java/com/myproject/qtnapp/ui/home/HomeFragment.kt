@@ -11,11 +11,14 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.myproject.qtnapp.R
 import com.myproject.qtnapp.data.local.entity.FoodByCategoryEntity
+import com.myproject.qtnapp.data.local.entity.HistoryEntity
 import com.myproject.qtnapp.databinding.FragmentHomeBinding
 import com.myproject.qtnapp.di.SharedPreference
 import com.myproject.qtnapp.ui.calorie.CalorieActivity
 import com.myproject.qtnapp.ui.meal.MealActivity
 import org.koin.android.ext.android.inject
+import java.text.SimpleDateFormat
+import java.util.*
 import kotlin.math.log
 import kotlin.time.Duration.Companion.minutes
 
@@ -42,19 +45,42 @@ class HomeFragment : Fragment(), HomeHorizontalAdapter.onItemClick {
         if (categoryData != null) {
             viewModel.getFoodByCategory(categoryData)
         }
-        init()
+        setupHealth()
     }
 
-    private fun init() {
+    private fun setupHealth() {
+        val timeStamp = SharedPreference(requireContext()).getTimeStamp("time_data")
+        val currentDate = SimpleDateFormat("dd/MM/yyyy").format(Calendar.getInstance().time)
         val calorie = SharedPreference(requireContext()).getCalorieData("calorie_total")
         val pro = SharedPreference(requireContext()).getProData("pro_total")
         val carb = SharedPreference(requireContext()).getCarbData("carb_total")
         val fat = SharedPreference(requireContext()).getFatData("fat_total")
+        if(!timeStamp.equals(currentDate)) {
+            with(SharedPreference(requireContext())) {
+                val history = HistoryEntity(
+                    id = 0,
+                    date = timeStamp,
+                    pro = pro,
+                    carb = carb,
+                    fat = fat,
+                    isComplete = (pro*4) + (carb*4) + (fat*2) > calorie
+                )
+                viewModel.insertHistory(history)
+                clearPro("pro_total")
+                clearCarb("carb_total")
+                clearFat("fat_total")
+                SharedPreference(requireContext()).timeStamp("time_data", currentDate)
+            }
+        }
+        init(calorie, pro, carb, fat)
+    }
+
+    private fun init(calorie: Int, pro: Int, carb: Int, fat: Int) {
         with(binding) {
             tvCalories.text = calorie.toString()
-            pbPro.max = (40.0/100.0 * calorie).toInt()
-            pbCarb.max = (40.0/100.0 * calorie).toInt()
-            pbFat.max = (20.0/100.0 * calorie).toInt()
+            pbPro.max = (40.0/100.0 * calorie / 4).toInt()
+            pbCarb.max = (40.0/100.0 * calorie/ 4).toInt()
+            pbFat.max = (20.0/100.0 * calorie / 2).toInt()
             pbPro.progress = pro
             tvPro.text = pro.toString()
             pbCarb.progress = carb
@@ -89,6 +115,6 @@ class HomeFragment : Fragment(), HomeHorizontalAdapter.onItemClick {
 
     override fun onResume() {
         super.onResume()
-        init()
+        setupHealth()
     }
 }

@@ -2,6 +2,7 @@ package com.myproject.qtnapp.data.local
 
 import com.myproject.qtnapp.base.ResponseResult
 import com.myproject.qtnapp.data.local.entity.FoodByCategoryEntity
+import com.myproject.qtnapp.data.local.entity.HistoryEntity
 import com.myproject.qtnapp.data.local.entity.UserEntity
 
 class LocalRepository(private val appDataBase: AppDataBase) {
@@ -49,5 +50,13 @@ class LocalRepository(private val appDataBase: AppDataBase) {
 
     suspend fun deleteAllFood() = getResult {
         appDataBase.foodByCategoryDao().deleteAllFood()
+    }
+
+    suspend fun insertHistory(history: HistoryEntity) = getResult {
+        appDataBase.historyDao().insertHistory(history)
+    }
+
+    suspend fun getHistory() = getResult {
+        appDataBase.historyDao().getHistory()
     }
 }

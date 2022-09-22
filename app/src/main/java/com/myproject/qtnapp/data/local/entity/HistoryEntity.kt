@@ -13,7 +13,7 @@ class HistoryEntity(
     @ColumnInfo(name = "id")
     val id: Int,
     @ColumnInfo(name = "date")
-    val data: String?,
+    val date: String?,
     @ColumnInfo(name = "fat")
     val fat: Int?,
     @ColumnInfo(name = "pro")
