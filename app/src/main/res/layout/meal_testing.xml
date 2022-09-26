@@ -89,10 +89,10 @@
                     android:layout_marginRight="16dp"
                     android:layout_weight="1"
                     android:orientation="vertical"
-                    android:padding="8dp">
+                    android:padding="10dp">
 
                     <LinearLayout
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:background="@drawable/bg_oval_white"
                         android:backgroundTint="@color/yellow"
@@ -103,7 +103,7 @@
                         android:paddingLeft="20dp">
 
                         <TextView
-                            android:id="@+id/tv_pro_meal_detail"
+                            android:id="@+id/iv_pro_meal_detail"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
@@ -130,10 +130,10 @@
                     android:layout_marginRight="16dp"
                     android:layout_weight="1"
                     android:orientation="vertical"
-                    android:padding="8dp">
+                    android:padding="10dp">
 
                     <LinearLayout
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:background="@drawable/bg_oval_white"
                         android:backgroundTint="@color/yellow"
@@ -144,7 +144,7 @@
                         android:paddingLeft="20dp">
 
                         <TextView
-                            android:id="@+id/tv_fat_meal_detail"
+                            android:id="@+id/iv_fat_meal_detail"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
@@ -171,10 +171,10 @@
                     android:layout_marginRight="16dp"
                     android:layout_weight="1"
                     android:orientation="vertical"
-                    android:padding="8dp">
+                    android:padding="10dp">
 
                     <LinearLayout
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:background="@drawable/bg_oval_white"
                         android:backgroundTint="@color/yellow"
@@ -185,7 +185,7 @@
                         android:paddingLeft="20dp">
 
                         <TextView
-                            android:id="@+id/tv_carb_meal_detail"
+                            android:id="@+id/iv_carb_meal_detail"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"

@@ -64,11 +64,11 @@ class MealActivity : AppCompatActivity() {
                 it.getContentIfNotHandled()?.meals?.map { data ->
                     with(binding) {
                         tvFoodDetail.text = data.strMeal
-                        tvFoodCategory.text = data.strCategory
                         tvFoodLocation.text = data.strArea
                         tvFoodInstruction.text = data.strInstructions
-                        tvFoodTag.text = data.strTags
-                        tvFoodLinkYoutube.text = data.strYoutube
+                        tvProMealDetail.text = categoryData?.pro.toString()
+                        tvFatMealDetail.text = categoryData?.fat.toString()
+                        tvCarbMealDetail.text = categoryData?.carb.toString()
                         Glide.with(this@MealActivity)
                             .load(data.strMealThumb)
                             .into(ivFoodDetail)
