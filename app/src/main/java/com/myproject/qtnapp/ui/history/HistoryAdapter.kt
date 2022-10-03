@@ -28,7 +28,9 @@ class HistoryAdapter(val historyList: List<HistoryEntity>) : RecyclerView.Adapte
 
     override fun onBindViewHolder(holder: ListViewHolder, position: Int) {
         val history = historyList[position]
-        holder.date.text = SimpleDateFormat("dd MMM yyyy").format(SimpleDateFormat("dd/MM/yyyy").parse(history.date))
+        if(!history.date.equals("")) {
+            holder.date.text = SimpleDateFormat("dd MMM yyyy").format(SimpleDateFormat("dd/MM/yyyy").parse(history.date))
+        }
         holder.pro.text = history.pro.toString()
         holder.carb.text = history.carb.toString()
         holder.fat.text = history.fat.toString()
