@@ -7,6 +7,7 @@ import com.myproject.qtnapp.ui.history.HistoryViewModel
 import com.myproject.qtnapp.ui.home.HomeViewModel
 import com.myproject.qtnapp.ui.login.LoginViewModel
 import com.myproject.qtnapp.ui.meal.MealViewModel
+import com.myproject.qtnapp.ui.profile.ProfileViewModel
 import com.myproject.qtnapp.ui.register.RegisterViewModel
 import io.reactivex.Single
 import org.koin.dsl.module
@@ -19,4 +20,5 @@ val viewModelModule = module {
     single { MealViewModel(get()) }
     single { FavoriteViewModel(get()) }
     single { HistoryViewModel(get()) }
+    single { ProfileViewModel(get()) }
 }

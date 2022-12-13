@@ -14,25 +14,47 @@
         android:textSize="18sp"
         android:textStyle="bold" />
 
-    <EditText
-        android:id="@+id/et_tinggi_badan"
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="number"
-        android:layout_marginTop="20dp" />
+        android:hint="Tinggi Badan"
+        android:layout_marginTop="20dp">
 
-    <EditText
-        android:id="@+id/et_berat_badan"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="number"
-        android:layout_marginTop="20dp" />
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_tinggi_badan"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number" />
+    </com.google.android.material.textfield.TextInputLayout>
 
-    <EditText
-        android:id="@+id/et_umur"
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp" />
+        android:hint="Berat Badan"
+        android:layout_marginTop="20dp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_berat_badan"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Umur"
+        android:layout_marginTop="20dp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_umur"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number" />
+    </com.google.android.material.textfield.TextInputLayout>
 
     <RadioGroup
         android:id="@+id/rg_group"
@@ -59,20 +81,39 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="30dp"
-        android:text="3500 kalori/hari"
+        android:text="0 kalori/hari"
         android:textColor="@color/black" />
 
-    <TextView
-        android:id="@+id/btn_hitung"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Hitung" />
+        android:weightSum="2">
 
-    <TextView
-        android:id="@+id/btn_save"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="Save" />
+        <TextView
+            android:id="@+id/btn_hitung"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:background="@drawable/bg_rounded_white_stroke_black"
+            android:layout_margin="16dp"
+            android:textAlignment="center"
+            android:padding="16dp"
+            android:textSize="16dp"
+            android:layout_height="wrap_content"
+            android:text="Hitung" />
+
+        <TextView
+            android:id="@+id/btn_save"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_margin="16dp"
+            android:background="@drawable/bg_rounded_white"
+            android:backgroundTint="@color/colorPrimary"
+            android:textColor="@color/white"
+            android:textSize="16dp"
+            android:textAlignment="center"
+            android:padding="16dp"
+            android:layout_height="wrap_content"
+            android:text="Save" />
+    </LinearLayout>
 
 </LinearLayout>

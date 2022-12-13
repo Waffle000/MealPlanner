@@ -14,6 +14,12 @@ class SharedPreference(context: Context) {
         editor.apply()
     }
 
+    fun email(email_key: String, email: String) {
+        val editor: SharedPreferences.Editor = sharedPreferences.edit()
+        editor.putString(email_key, email)
+        editor.apply()
+    }
+
     fun timeStamp(time_key: String, time: String) {
         val editor: SharedPreferences.Editor = sharedPreferences.edit()
         editor.putString(time_key, time)
@@ -74,6 +80,10 @@ class SharedPreference(context: Context) {
     }
     fun getIsLogin(login_key: String) : Boolean {
         return sharedPreferences.getBoolean(login_key, false)
+    }
+
+    fun getEmail(email_key: String) : String {
+        return sharedPreferences.getString(email_key, "") ?: ""
     }
 
     fun clearPro(pro_key: String) {

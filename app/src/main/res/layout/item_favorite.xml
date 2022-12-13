@@ -3,40 +3,37 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_margin="8dp"
     app:cardCornerRadius="10dp"
-    app:cardElevation="5dp"
-    android:layout_margin="8dp">
+    app:cardElevation="5dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:padding="16dp">
+        android:padding="8dp">
 
         <androidx.cardview.widget.CardView
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
             app:cardCornerRadius="10dp">
 
             <ImageView
                 android:id="@+id/iv_image_fav"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:src="@drawable/img_beef"/>
+                android:src="@drawable/img_beef" />
         </androidx.cardview.widget.CardView>
 
-        <LinearLayout
+        <TextView
+            android:id="@+id/tv_name_fav"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:layout_marginLeft="8dp">
-
-            <TextView
-                android:id="@+id/tv_name_fav"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Portuguese prego with green piri-piri"
-                android:textColor="@color/black"/>
-        </LinearLayout>
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:maxLines="2"
+            android:textSize="15sp"
+            android:layout_marginLeft="16dp"
+            android:text="Portuguese prego with green piri-piri"
+            android:textColor="@color/black" />
     </LinearLayout>
 </androidx.cardview.widget.CardView>

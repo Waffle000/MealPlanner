@@ -38,9 +38,6 @@ class HomeFragment : Fragment(), HomeHorizontalAdapter.onItemClick {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         observeData()
-        binding.tvTitleCalories.setOnClickListener {
-            startActivity(Intent(activity, CalorieActivity::class.java))
-        }
         val categoryData = SharedPreference(requireContext()).getCategoryData("category")
         if (categoryData != null) {
             viewModel.getFoodByCategory(categoryData)
@@ -49,8 +46,12 @@ class HomeFragment : Fragment(), HomeHorizontalAdapter.onItemClick {
     }
 
     private fun setupHealth() {
-        val timeStamp = SharedPreference(requireContext()).getTimeStamp("time_data")
         val currentDate = SimpleDateFormat("dd/MM/yyyy").format(Calendar.getInstance().time)
+        val startTimeStamp = SharedPreference(requireContext()).getTimeStamp("time_data")
+        if(startTimeStamp == "") {
+            SharedPreference(requireContext()).timeStamp("time_data", currentDate)
+        }
+        val timeStamp = SharedPreference(requireContext()).getTimeStamp("time_data")
         val calorie = SharedPreference(requireContext()).getCalorieData("calorie_total")
         val pro = SharedPreference(requireContext()).getProData("pro_total")
         val carb = SharedPreference(requireContext()).getCarbData("carb_total")
@@ -77,9 +78,10 @@ class HomeFragment : Fragment(), HomeHorizontalAdapter.onItemClick {
 
     private fun init(calorie: Int, pro: Int, carb: Int, fat: Int) {
         with(binding) {
+            tvDailyCalories.text = ((pro*4) + (carb*4) + (fat*2)).toString()
             tvCalories.text = calorie.toString()
             pbPro.max = (40.0/100.0 * calorie / 4).toInt()
-            pbCarb.max = (40.0/100.0 * calorie/ 4).toInt()
+            pbCarb.max = (40.0/100.0 * calorie / 4).toInt()
             pbFat.max = (20.0/100.0 * calorie / 2).toInt()
             pbPro.progress = pro
             tvPro.text = pro.toString()

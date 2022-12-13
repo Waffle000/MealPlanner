@@ -6,8 +6,11 @@ import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.myproject.qtnapp.R
+import com.myproject.qtnapp.data.local.entity.UserEntity
 import com.myproject.qtnapp.databinding.ActivityCalorieBinding
 import com.myproject.qtnapp.di.SharedPreference
+import com.myproject.qtnapp.ui.category.CategoryActivity
+import com.myproject.qtnapp.ui.navi.NavigationActivity
 
 class CalorieActivity : AppCompatActivity() {
 
@@ -23,6 +26,7 @@ class CalorieActivity : AppCompatActivity() {
     }
 
     private fun init() {
+        val userData = intent.getParcelableExtra<UserEntity>(USER_DATA)
         var gender = 0
         binding.rgGroup.setOnCheckedChangeListener { _, checkedId ->
             when(checkedId) {
@@ -44,17 +48,24 @@ class CalorieActivity : AppCompatActivity() {
                 Toast.makeText(this, "Data tidak valid", Toast.LENGTH_SHORT).show()
             }
 
-            binding.tvTotalCal.text = totalCalorie.toString()
+            binding.tvTotalCal.text = "${totalCalorie} kalori/hari"
         }
 
         binding.btnSave.setOnClickListener {
             if(totalCalorie != 0) {
                 val sharedPreference = SharedPreference(this)
                 sharedPreference.calorieTotal("calorie_total", totalCalorie)
+                sharedPreference.isLogin("isLogin", true)
+                sharedPreference.email("email", userData?.email ?: "")
+                startActivity(Intent(this, NavigationActivity::class.java))
                 finish()
             } else {
                 Toast.makeText(this, "Kalori belum di isi", Toast.LENGTH_SHORT).show()
             }
         }
+    }
+
+    companion object {
+        val USER_DATA = "CategoryActivity.UserData"
     }
 }

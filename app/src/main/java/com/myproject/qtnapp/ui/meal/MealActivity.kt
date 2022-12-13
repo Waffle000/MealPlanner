@@ -56,6 +56,9 @@ class MealActivity : AppCompatActivity() {
             sharedPreference.fatTotal("fat_total", fatTotal)
             finish()
         }
+        binding.ivBack.setOnClickListener {
+            finish()
+        }
     }
 
     private fun observeData() {

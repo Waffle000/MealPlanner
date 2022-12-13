@@ -73,6 +73,7 @@ class LoginActivity : AppCompatActivity() {
                             startActivity(Intent(this@LoginActivity, NavigationActivity::class.java))
                             val sharedPreference = SharedPreference(this@LoginActivity)
                             sharedPreference.isLogin("isLogin", true)
+                            sharedPreference.email("email", data.email ?: "")
                             finish()
                         }
                     } else {
